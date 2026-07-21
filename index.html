@@ -4,184 +4,294 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Akash Bhattacharya — Case Files</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312192A'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' fill='%23EDE6D6' text-anchor='middle'%3EAB%3C/text%3E%3C/svg%3E">
 <style>
   :root{
     --ink:#12192A;
-    --ink-soft:#3C445A;
-    --paper:#EDE6D6;
-    --paper-2:#E3D9C2;
-    --line:#C7BB9C;
-    --gold:#AD8A2E;
+    --ink-soft:#4A5170;
+    --ink-faint:#8A8F9E;
+    --paper:#F1EBDD;
+    --paper-2:#E7DFC9;
+    --card:#FFFEFB;
+    --line: rgba(18,25,42,0.13);
+    --line-strong: rgba(18,25,42,0.5);
     --lens:#AD8A2E;
     --lens-soft:#F1E6C6;
-    --crimson:#9C2B32;
-    --pitch:#2A5B3E;
-    --azure:#254E8C;
-    --amber:#C98F2F;
-    --radius:2px;
+    --lens-dim: rgba(173,138,46,0.14);
+    --radius-lg:18px;
+    --radius-md:12px;
+    --radius-sm:7px;
+    --shadow-1: 0 1px 2px rgba(18,25,42,0.06);
+    --shadow-2: 0 18px 40px -18px rgba(18,25,42,0.28);
+    --ease: cubic-bezier(.22,.9,.32,1);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:
-      radial-gradient(1200px 600px at 90% -10%, rgba(255,255,255,0.5), transparent 60%),
-      var(--paper);
+    background:var(--paper);
     color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    transition:background .5s var(--ease);
+    overflow-x:hidden;
   }
   ::selection{ background:var(--lens); color:#fff; }
+  a{ color:inherit; }
+  button{ font:inherit; }
 
-  .serif{ font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif; }
-  .mono{ font-family:"Courier New",ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.04em; }
+  .grain{
+    position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.5; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .glow{
+    position:fixed; z-index:0; pointer-events:none; inset:0;
+    background:
+      radial-gradient(900px 500px at 88% -8%, color-mix(in srgb, var(--lens) 16%, transparent), transparent 62%),
+      radial-gradient(700px 420px at 4% 8%, color-mix(in srgb, var(--lens) 9%, transparent), transparent 60%);
+    transition:background .6s var(--ease);
+  }
 
-  /* ===== topbar ===== */
+  .serif{ font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif; }
+  .mono{ font-family:"SF Mono","Courier New",ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.045em; }
+
+  a:focus-visible, button:focus-visible, .lens-tab:focus-visible{
+    outline:2px solid var(--lens); outline-offset:3px; border-radius:4px;
+  }
+
   header.top{
     position:sticky; top:0; z-index:50;
-    background:rgba(237,230,214,0.92);
-    backdrop-filter: blur(6px);
-    border-bottom:1px solid var(--line);
+    background:color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, box-shadow .3s ease;
+  }
+  header.top.scrolled{
+    border-bottom-color:var(--line);
+    box-shadow:0 8px 24px -18px rgba(18,25,42,.4);
   }
   .top-inner{
-    max-width:1180px; margin:0 auto; padding:14px 24px;
-    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    max-width:1180px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap;
   }
-  .brand{ display:flex; align-items:baseline; gap:10px; }
+  .brand{ display:flex; align-items:center; gap:12px; }
   .brand .mark{
-    width:34px;height:34px;border:1.5px solid var(--ink);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;
-    font-weight:700; font-size:15px; flex:none;
+    width:38px;height:38px;border-radius:11px; background:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Iowan Old Style",Georgia,serif; font-weight:700; font-size:15px; color:var(--paper);
+    flex:none; box-shadow:var(--shadow-1); transition:background .5s var(--ease);
   }
-  .brand h1{ font-size:17px; margin:0; letter-spacing:.01em; }
-  .brand .role{ font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.12em; }
+  .brand h1{ font-size:16.5px; margin:0; letter-spacing:.005em; font-weight:700; }
+  .brand .role{ font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.1em; margin-top:1px; transition:color .3s; }
 
-  .top-controls{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .top-controls{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
 
-  .pill-group{
-    display:flex; border:1px solid var(--ink); border-radius:999px; overflow:hidden;
+  .segmented{
+    position:relative; display:flex; background:var(--paper-2); border-radius:999px; padding:3px;
+    border:1px solid var(--line);
   }
-  .pill-group button{
-    background:transparent; border:none; padding:7px 14px; font-size:12px; cursor:pointer;
-    font-family:inherit; text-transform:uppercase; letter-spacing:.06em; color:var(--ink);
-    border-right:1px solid var(--ink);
+  .segmented button{
+    position:relative; z-index:2; background:transparent; border:none; padding:7px 15px; font-size:12px;
+    cursor:pointer; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft);
+    border-radius:999px; transition:color .25s ease; white-space:nowrap;
   }
-  .pill-group button:last-child{ border-right:none; }
-  .pill-group button.active{ background:var(--ink); color:var(--paper); }
+  .segmented button.active{ color:var(--paper); }
+  .segmented .thumb{
+    position:absolute; top:3px; bottom:3px; left:3px; border-radius:999px; background:var(--ink);
+    transition:transform .35s var(--ease), width .35s var(--ease); z-index:1;
+    box-shadow:var(--shadow-1);
+  }
 
   .dl-btn{
-    background:var(--ink); color:var(--paper); border:1px solid var(--ink);
-    padding:8px 16px; border-radius:999px; font-size:12px; text-decoration:none;
-    text-transform:uppercase; letter-spacing:.08em; display:inline-flex; align-items:center; gap:8px;
-    transition:transform .15s ease;
+    position:relative; background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+    padding:9px 18px; border-radius:999px; font-size:12px; text-decoration:none;
+    text-transform:uppercase; letter-spacing:.07em; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .25s var(--ease), background .3s ease, box-shadow .3s ease;
+    overflow:hidden;
   }
-  .dl-btn:hover{ transform:translateY(-1px); background:var(--lens); border-color:var(--lens); }
+  .dl-btn svg{ width:13px; height:13px; transition:transform .25s var(--ease); }
+  .dl-btn:hover{ transform:translateY(-2px); background:var(--lens); border-color:var(--lens); box-shadow:0 10px 22px -8px var(--lens); }
+  .dl-btn:hover svg{ transform:translateY(2px); }
+  .dl-btn:active{ transform:translateY(0); }
 
-  /* ===== hero ===== */
   .hero{
-    max-width:1180px; margin:0 auto; padding:64px 24px 32px;
-    display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:end;
+    position:relative; z-index:1;
+    max-width:1180px; margin:0 auto; padding:80px 28px 40px;
+    display:grid; grid-template-columns:1.35fr .65fr; gap:48px; align-items:end;
   }
+  .hero-copy{ opacity:0; transform:translateY(16px); animation:riseIn .8s var(--ease) .05s forwards; }
   .hero .eyebrow{
-    font-size:12px; text-transform:uppercase; letter-spacing:.22em; color:var(--lens);
-    margin:0 0 14px;
+    font-size:12px; text-transform:uppercase; letter-spacing:.24em; color:var(--lens);
+    margin:0 0 16px; display:flex; align-items:center; gap:10px; transition:color .4s;
   }
+  .hero .eyebrow::before{ content:""; width:26px; height:1px; background:var(--lens); transition:background .4s; }
   .hero h2{
-    font-size:clamp(34px,5vw,58px); line-height:1.02; margin:0 0 18px; font-weight:700;
+    font-size:clamp(36px,5.2vw,62px); line-height:1.04; margin:0 0 20px; font-weight:700; letter-spacing:-.015em;
   }
-  .hero h2 em{ font-style:italic; color:var(--lens); }
+  .hero h2 em{ font-style:italic; color:var(--lens); font-weight:400; transition:color .4s; }
   .hero p.sub{
-    font-size:16px; color:var(--ink-soft); max-width:60ch; line-height:1.55; margin:0;
+    font-size:16.5px; color:var(--ink-soft); max-width:58ch; line-height:1.6; margin:0;
   }
   .hero .stamp{
+    opacity:0; transform:translateY(16px) rotate(3deg); animation:riseInStamp .8s var(--ease) .2s forwards;
     justify-self:end; text-align:right;
-    border:2px solid var(--lens); color:var(--lens); border-radius:6px;
-    padding:14px 18px; transform:rotate(3deg); font-family:"Courier New",monospace;
-    font-size:12px; letter-spacing:.1em; text-transform:uppercase; white-space:nowrap;
+    border:1.5px solid var(--lens); color:var(--lens); border-radius:10px;
+    padding:16px 20px; font-size:11.5px; letter-spacing:.09em; text-transform:uppercase;
+    white-space:nowrap; background:color-mix(in srgb, var(--lens) 6%, transparent);
+    transition:border-color .4s, color .4s, background .4s;
   }
+  .stamp .line{ display:flex; justify-content:space-between; gap:16px; }
+  .stamp .line + .line{ margin-top:5px; padding-top:5px; border-top:1px dashed color-mix(in srgb, var(--lens) 45%, transparent); }
+  .stamp b{ color:var(--ink); font-weight:700; }
 
-  /* ===== lens tabs (folder tabs) ===== */
+  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
+  @keyframes riseInStamp{ to{ opacity:1; transform:translateY(0) rotate(2deg); } }
+
+  .lens-bar-wrap{ position:relative; z-index:1; max-width:1180px; margin:22px auto 0; padding:0 28px; }
   .lens-bar{
-    max-width:1180px; margin:18px auto 0; padding:0 24px;
-    display:flex; gap:6px; flex-wrap:wrap;
+    display:flex; gap:4px; flex-wrap:wrap; position:relative;
+    border-bottom:1px solid var(--line-strong);
   }
   .lens-tab{
-    cursor:pointer; user-select:none;
-    padding:10px 18px 12px; border:1px solid var(--line); border-bottom:none;
-    background:var(--paper-2); border-radius:8px 8px 0 0;
-    font-size:13px; display:flex; align-items:center; gap:8px; color:var(--ink-soft);
-    transition:all .18s ease;
+    cursor:pointer; user-select:none; position:relative;
+    padding:13px 20px 15px; border:none; background:transparent;
+    font-size:13.5px; display:flex; align-items:center; gap:9px; color:var(--ink-faint);
+    transition:color .25s ease; font-weight:600;
   }
-  .lens-tab .ic{ font-size:15px; }
-  .lens-tab.active{
-    background:var(--paper); color:var(--ink); font-weight:700;
-    border-color:var(--ink); box-shadow:0 -2px 0 var(--lens) inset;
+  .lens-tab .ic{ font-size:16px; filter:grayscale(1); opacity:.55; transition:filter .3s, opacity .3s, transform .3s var(--ease); }
+  .lens-tab.active{ color:var(--ink); }
+  .lens-tab.active .ic{ filter:none; opacity:1; transform:scale(1.08) translateY(-1px); }
+  .lens-tab:hover{ color:var(--ink); }
+  .lens-tab .underline{
+    position:absolute; left:14px; right:14px; bottom:-1px; height:2.5px; background:var(--lens);
+    border-radius:2px; transform:scaleX(0); transform-origin:center; transition:transform .35s var(--ease), background .4s;
   }
-  .lens-tab:hover:not(.active){ color:var(--ink); }
+  .lens-tab.active .underline{ transform:scaleX(1); }
 
-  .board-wrap{
-    border-top:1px solid var(--ink);
-    background:var(--paper);
-  }
+  .board-wrap{ position:relative; z-index:1; }
 
   .lens-intro{
-    max-width:1180px; margin:0 auto; padding:26px 24px 0;
-    font-size:14.5px; color:var(--ink-soft); max-width:80ch; line-height:1.6;
+    max-width:1180px; margin:0 auto; padding:28px 28px 0;
+    font-size:14.5px; color:var(--ink-soft); line-height:1.65; max-width:78ch;
+    transition:color .3s;
   }
   .lens-intro b{ color:var(--ink); }
 
-  /* ===== board / cards ===== */
   .board{
-    max-width:1180px; margin:0 auto; padding:24px 24px 90px;
-    display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px;
+    max-width:1180px; margin:0 auto; padding:26px 28px 100px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:20px;
   }
   .card{
-    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
-    padding:20px 20px 18px; position:relative; overflow:hidden;
-    box-shadow:0 1px 0 rgba(0,0,0,0.02);
-    transition:transform .18s ease, box-shadow .18s ease;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:24px 24px 22px; position:relative; overflow:hidden;
+    box-shadow:var(--shadow-1);
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    opacity:0; transform:translateY(18px) scale(.985);
   }
-  .card:hover{ transform:translateY(-3px); box-shadow:0 10px 24px rgba(18,25,42,0.10); }
+  .card.in{ animation:cardIn .6s var(--ease) forwards; }
+  @keyframes cardIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
+
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-2);
+    border-color:color-mix(in srgb, var(--lens) 45%, var(--line));
+  }
   .card::before{
-    content:""; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--lens);
+    content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--lens);
+    opacity:.85; transition:background .4s;
   }
   .card .tag{
-    font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--lens);
-    font-weight:700; margin-bottom:6px; display:block;
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.14em; color:var(--lens);
+    font-weight:700; margin-bottom:9px; display:inline-flex; align-items:center; gap:7px;
+    padding:3px 0; transition:color .4s;
   }
-  .card h3{ font-size:18px; margin:0 0 3px; line-height:1.25; }
-  .card .meta{ font-size:12px; color:var(--ink-soft); margin-bottom:10px; }
-  .card p.blurb{ font-size:13.5px; line-height:1.55; color:var(--ink); margin:0 0 12px; }
-  .card ul.bullets{ margin:0 0 12px; padding-left:16px; }
-  .card ul.bullets li{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-bottom:4px; }
-  .chips{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .card .tag::after{ content:""; width:5px; height:5px; border-radius:50%; background:var(--lens); transition:background .4s; }
+  .card h3{ font-size:18.5px; margin:0 0 4px; line-height:1.28; letter-spacing:-.005em; }
+  .card .meta{ font-size:11.5px; color:var(--ink-faint); margin-bottom:13px; letter-spacing:.01em; }
+  .card p.blurb{ font-size:13.7px; line-height:1.62; color:var(--ink); margin:0 0 14px; }
+  .card ul.bullets{ margin:0 0 14px; padding-left:0; list-style:none; }
+  .card ul.bullets li{
+    font-size:12.5px; color:var(--ink-soft); line-height:1.55; margin-bottom:6px;
+    padding-left:16px; position:relative;
+  }
+  .card ul.bullets li::before{
+    content:""; position:absolute; left:2px; top:7px; width:5px; height:1.5px; background:var(--ink-faint);
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
   .chip{
-    font-size:10.5px; padding:3px 8px; border-radius:999px; background:var(--lens-soft);
-    color:var(--ink); border:1px solid var(--line); font-family:"Courier New",monospace;
+    font-size:10.5px; padding:4px 9px; border-radius:999px; background:var(--lens-dim);
+    color:var(--ink-soft); border:1px solid transparent; transition:background .4s, color .3s;
   }
+  .card-foot{ display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--line); }
   .cat-badges{ display:flex; gap:6px; }
   .badge{
-    font-size:10px; text-transform:uppercase; letter-spacing:.06em; padding:3px 7px;
-    border-radius:3px; border:1px solid var(--ink); color:var(--ink); font-weight:700;
+    font-size:9.5px; text-transform:uppercase; letter-spacing:.07em; padding:4px 8px;
+    border-radius:5px; border:1px solid var(--line-strong); color:var(--ink-soft); font-weight:700;
+    transition:opacity .3s;
   }
-  .badge.dim{ opacity:.25; }
+  .badge.dim{ opacity:.2; }
+  .badge.on{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
 
-  /* ===== footer ===== */
   footer{
-    border-top:1px solid var(--ink); padding:34px 24px 50px; text-align:center;
-    color:var(--ink-soft); font-size:12.5px;
+    position:relative; z-index:1;
+    border-top:1px solid var(--line); padding:44px 28px 60px; text-align:center;
+    color:var(--ink-faint); font-size:12.5px;
   }
-  footer a{ color:var(--ink); }
+  footer .fmark{
+    width:40px;height:40px;border-radius:11px;background:var(--ink);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-weight:700;
+    margin:0 auto 16px; font-size:15px;
+  }
+  footer a{ color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line); transition:color .2s, border-color .2s; }
+  footer a:hover{ color:var(--lens); border-color:var(--lens); }
+  footer .sep{ opacity:.5; margin:0 8px; }
+
+  .visitor-counter{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    margin-top:18px; padding-top:14px; border-top:1px solid var(--line);
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint);
+  }
+  .visitor-count{
+    position:relative; display:inline-flex; align-items:center; gap:5px;
+    padding:4px 9px; border-radius:999px; background:var(--lens-dim);
+    color:var(--lens); font-weight:700; font-family:"SF Mono",monospace;
+  }
+  .visitor-dot{
+    width:6px; height:6px; border-radius:50%; background:var(--lens);
+    display:inline-block; opacity:.6; animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%, 100%{ opacity:.6; transform:scale(1); }
+    50%{ opacity:1; transform:scale(1.2); }
+  }
+  .visitor-count.updated{
+    animation:countBounce .4s var(--ease);
+  }
+  @keyframes countBounce{
+    0%{ transform:scale(1); }
+    50%{ transform:scale(1.12); }
+    100%{ transform:scale(1); }
+  }
 
   @media (max-width:760px){
-    .hero{ grid-template-columns:1fr; }
+    .hero{ grid-template-columns:1fr; padding-top:56px; }
     .hero .stamp{ justify-self:start; text-align:left; }
+    .top-controls{ width:100%; justify-content:space-between; }
+    .board{ grid-template-columns:1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
   }
 </style>
 </head>
 <body data-lens="big4">
+<div class="grain"></div>
+<div class="glow"></div>
 
-<header class="top">
+<header class="top" id="topHeader">
   <div class="top-inner">
     <div class="brand">
       <div class="mark">AB</div>
@@ -191,30 +301,36 @@
       </div>
     </div>
     <div class="top-controls">
-      <div class="pill-group" id="catToggle">
+      <div class="segmented" id="catToggle">
+        <div class="thumb" id="catThumb"></div>
         <button data-cat="all" class="active">All Work</button>
         <button data-cat="ai">AI Engineer</button>
         <button data-cat="dev">Senior Developer</button>
       </div>
-      <a class="dl-btn" id="resumeBtn" download="Akash_Bhattacharya_Resume.pdf">↓ Résumé (PDF)</a>
+      <a class="dl-btn" id="resumeBtn" download="Akash_Bhattacharya_Resume.pdf">
+        Résumé
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+      </a>
     </div>
   </div>
 </header>
 
 <section class="hero">
-  <div>
+  <div class="hero-copy">
     <p class="eyebrow" id="heroEyebrow">Four years, one case load</p>
     <h2 class="serif" id="heroTitle">Same career. <em>Four</em> ways to read the file.</h2>
-    <p class="sub" id="heroSub">Every project below is real — RAG pipelines, MCP servers, .NET platforms, enterprise integrations, all shipped at PwC India. Pick a lens above the board to see it told a different way.</p>
+    <p class="sub" id="heroSub">Every project below is real — RAG pipelines, MCP servers, .NET platforms, enterprise integrations, all shipped at PwC India. Pick a lens below to see it told a different way.</p>
   </div>
-  <div class="stamp mono" id="heroStamp">status: active<br>clearance: full-stack</div>
+  <div class="stamp mono" id="heroStamp"></div>
 </section>
 
-<div class="lens-bar" id="lensBar">
-  <div class="lens-tab active" data-lens="big4"><span class="ic">🗂️</span> The Dossier</div>
-  <div class="lens-tab" data-lens="netflix"><span class="ic">🎬</span> The Series</div>
-  <div class="lens-tab" data-lens="football"><span class="ic">⚽</span> The Match</div>
-  <div class="lens-tab" data-lens="pokemon"><span class="ic">🧭</span> The Expedition</div>
+<div class="lens-bar-wrap">
+  <div class="lens-bar" id="lensBar">
+    <div class="lens-tab active" data-lens="big4"><span class="ic">🗂️</span> The Dossier<span class="underline"></span></div>
+    <div class="lens-tab" data-lens="netflix"><span class="ic">🎬</span> The Series<span class="underline"></span></div>
+    <div class="lens-tab" data-lens="football"><span class="ic">⚽</span> The Match<span class="underline"></span></div>
+    <div class="lens-tab" data-lens="pokemon"><span class="ic">🧭</span> The Expedition<span class="underline"></span></div>
+  </div>
 </div>
 
 <div class="board-wrap">
@@ -223,10 +339,18 @@
 </div>
 
 <footer>
-  <div class="mono">akash.12.7.00@gmail.com · +91-8900710091 · Kolkata, West Bengal, India</div>
-  <div style="margin-top:6px;">
+  <div class="fmark serif">AB</div>
+  <div class="mono">akash.12.7.00@gmail.com<span class="sep">·</span>+91-8900710091<span class="sep">·</span>Kolkata, West Bengal, India</div>
+  <div style="margin-top:10px;">
     <a href="https://linkedin.com/in/akashbhatt1207" target="_blank" rel="noopener">linkedin.com/in/akashbhatt1207</a>
-    &nbsp;·&nbsp; Jadavpur University, B.E. EECE
+    <span class="sep">·</span> Jadavpur University, B.E. EECE
+  </div>
+  <div class="visitor-counter">
+    <span>Visitors</span>
+    <div class="visitor-count" id="visitorCount">
+      <span class="visitor-dot"></span>
+      <span id="countValue">—</span>
+    </div>
   </div>
 </footer>
 
@@ -235,45 +359,41 @@ const RESUME_B64 = "JVBERi0xLjUKJdDUxdgKNyAwIG9iago8PAovTGVuZ3RoIDM2NjkgICAgICAK
 
 const LENS = {
   big4: {
-    label:"The Dossier",
     accent:"#AD8A2E", accentSoft:"#F1E6C6",
     eyebrow:"Engagement history · confidential",
     heroTitle:'Same career. <em>Four</em> ways to read the file.',
-    heroSub:"Every project below is real — RAG pipelines, MCP servers, .NET platforms, enterprise integrations, all shipped at PwC India. Pick a lens above the board to see it told a different way.",
-    stamp:"status: active<br>clearance: full-stack",
+    heroSub:"Every project below is real — RAG pipelines, MCP servers, .NET platforms, enterprise integrations, all shipped at PwC India. Pick a lens below to see it told a different way.",
+    stamp:[["status","active"],["clearance","full-stack"]],
     role:"Senior Consultant · PwC India",
     intro:"<b>Reading as a Big 4 consultant would.</b> Each entry is a case file: client problem, engagement scope, delivered outcome. This is the plain-language version of everything else on this page.",
     tag:(i)=>`Case File No. ${String(i+1).padStart(2,'0')}`,
   },
   netflix: {
-    label:"The Series",
     accent:"#9C2B32", accentSoft:"#F0D9DA",
     eyebrow:"Now streaming · 1 profile, 4 years",
     heroTitle:'One engineer. <em>One</em> long-running series.',
     heroSub:"Same body of work, cut as a show — seasons instead of years, episodes instead of tickets. Skip around, or watch it in order.",
-    stamp:"seasons: 4<br>renewed: yes",
-    role:"Lead, \"The .NET & AI Chronicles\"",
+    stamp:[["seasons","4"],["renewed","yes"]],
+    role:'Lead, "The .NET & AI Chronicles"',
     intro:"<b>Reading as episode guide.</b> Nothing here is fictional — the credits are just a friendlier way to skim four years of shipped work.",
     tag:(i)=>`S${Math.min(4, Math.floor(i/2.3)+1)} · E${(i%3)+1}`,
   },
   football: {
-    label:"The Match",
     accent:"#2A5B3E", accentSoft:"#DCE9DE",
     eyebrow:"Full-time report · 90+ minutes",
     heroTitle:'Four years, played out in <em>one</em> match.',
     heroSub:"Think of each project as a passage of play — build-up, the decisive touch, the outcome on the scoreboard. Commentary included.",
-    stamp:"form: WWWWW<br>touches: high-volume",
+    stamp:[["form","W W W W W"],["touches","high-volume"]],
     role:"№10 · Build & Attack, PwC India XI",
     intro:"<b>Reading as match commentary.</b> Every 'goal' below is a shipped, production feature — the scoreline is the actual measured impact.",
     tag:(i)=>`${9+i*9}' `,
   },
   pokemon: {
-    label:"The Expedition",
     accent:"#254E8C", accentSoft:"#DCE4F2",
     eyebrow:"Trainer log · region: enterprise AI",
     heroTitle:'A four-year expedition through <em>Enterprise-mon</em> territory.',
     heroSub:"Each build is a capture — a tool tamed, badge earned, and added to the party. The stack is the Pokédex entry.",
-    stamp:"badges: 9<br>party: full",
+    stamp:[["badges","9"],["party","full"]],
     role:"Trainer · Region: PwC India",
     intro:"<b>Reading as a trainer's logbook.</b> \"Caught\" means shipped to production. The badge is the measurable win each build delivered.",
     tag:(i)=>`Badge #${i+1}`,
@@ -453,16 +573,26 @@ const PROJECTS = [
 let currentCat = "all";
 let currentLens = "big4";
 
+function moveThumb(btn){
+  const thumb = document.getElementById('catThumb');
+  const group = document.getElementById('catToggle');
+  const gRect = group.getBoundingClientRect();
+  const bRect = btn.getBoundingClientRect();
+  thumb.style.width = bRect.width + 'px';
+  thumb.style.transform = `translateX(${bRect.left - gRect.left - 3}px)`;
+}
+
 function applyLensChrome(key){
   const L = LENS[key];
   document.body.dataset.lens = key;
   const root = document.documentElement.style;
   root.setProperty('--lens', L.accent);
   root.setProperty('--lens-soft', L.accentSoft);
+  root.setProperty('--lens-dim', L.accent + '24');
   document.getElementById('heroEyebrow').textContent = L.eyebrow;
   document.getElementById('heroTitle').innerHTML = L.heroTitle;
   document.getElementById('heroSub').textContent = L.heroSub;
-  document.getElementById('heroStamp').innerHTML = L.stamp;
+  document.getElementById('heroStamp').innerHTML = L.stamp.map(([k,v])=>`<div class="line"><span>${k}</span><b>${v}</b></div>`).join('');
   document.getElementById('roleLabel').textContent = L.role;
   document.getElementById('lensIntro').innerHTML = L.intro;
   document.querySelectorAll('.lens-tab').forEach(t=>{
@@ -470,18 +600,30 @@ function applyLensChrome(key){
   });
 }
 
+let revealObserver;
+function initObserver(){
+  revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target); }
+    });
+  }, { threshold:0.12, rootMargin:"0px 0px -40px 0px" });
+}
+
 function render(){
   const L = LENS[currentLens];
   const board = document.getElementById('board');
   board.innerHTML = "";
+  let shown = 0;
   PROJECTS.forEach((p,i)=>{
     if(currentCat!=="all" && !p.cats.includes(currentCat)) return;
     const card = document.createElement('div');
     card.className = 'card';
+    card.style.transitionDelay = (shown * 40) + 'ms';
+    shown++;
     const catBadges = `
       <div class="cat-badges">
-        <span class="badge ${p.cats.includes('ai')?'':'dim'}">AI</span>
-        <span class="badge ${p.cats.includes('dev')?'':'dim'}">DEV</span>
+        <span class="badge ${p.cats.includes('ai')? 'on':'dim'}">AI</span>
+        <span class="badge ${p.cats.includes('dev')? 'on':'dim'}">DEV</span>
       </div>`;
     card.innerHTML = `
       <span class="tag mono">${L.tag(i)}</span>
@@ -490,9 +632,10 @@ function render(){
       <p class="blurb">${p.blurb[currentLens]}</p>
       <ul class="bullets">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
       <div class="chips">${p.stack.map(s=>`<span class="chip">${s}</span>`).join('')}</div>
-      ${catBadges}
+      <div class="card-foot">${catBadges}</div>
     `;
     board.appendChild(card);
+    requestAnimationFrame(()=>revealObserver.observe(card));
   });
 }
 
@@ -509,7 +652,17 @@ document.getElementById('catToggle').addEventListener('click', (e)=>{
   if(!btn) return;
   currentCat = btn.dataset.cat;
   document.querySelectorAll('#catToggle button').forEach(b=>b.classList.toggle('active', b===btn));
+  moveThumb(btn);
   render();
+});
+
+window.addEventListener('scroll', ()=>{
+  document.getElementById('topHeader').classList.toggle('scrolled', window.scrollY > 8);
+}, { passive:true });
+
+window.addEventListener('resize', ()=>{
+  const active = document.querySelector('#catToggle button.active');
+  if(active) moveThumb(active);
 });
 
 (function initResumeLink(){
@@ -517,8 +670,40 @@ document.getElementById('catToggle').addEventListener('click', (e)=>{
   a.href = "data:application/pdf;base64," + RESUME_B64;
 })();
 
+(function initVisitorCounter(){
+  const countDisplay = document.getElementById('countValue');
+  const countContainer = document.getElementById('visitorCount');
+  const counterKey = 'akash_bhattacharya_portfolio_visits';
+  
+  async function fetchAndIncrementVisitors(){
+    try {
+      const response = await fetch(`https://api.countapi.xyz/hit/akash-portfolio.site/${counterKey}`);
+      const data = await response.json();
+      const count = data.value;
+      
+      countDisplay.textContent = count.toLocaleString();
+      countContainer.classList.add('updated');
+      setTimeout(()=>countContainer.classList.remove('updated'), 400);
+    } catch(err){
+      console.warn('Visitor counter unavailable:', err);
+      countDisplay.textContent = '✓';
+    }
+  }
+  
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', fetchAndIncrementVisitors);
+  } else {
+    fetchAndIncrementVisitors();
+  }
+})();
+
+initObserver();
 applyLensChrome(currentLens);
 render();
+window.addEventListener('load', ()=>{
+  const active = document.querySelector('#catToggle button.active');
+  if(active) moveThumb(active);
+});
 </script>
 </body>
 </html>
