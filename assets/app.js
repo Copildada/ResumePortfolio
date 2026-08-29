@@ -33,10 +33,35 @@
   /* ---------------- Mobile menu ---------------- */
   const sidebar = document.getElementById('sidebar');
   const menuToggle = document.getElementById('menuToggle');
-  menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-  document.querySelectorAll('.side-nav a').forEach(a =>
-    a.addEventListener('click', () => sidebar.classList.remove('open'))
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarBackdrop.classList.add('open');
+    document.body.classList.add('sidebar-locked');
+    menuToggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarBackdrop.classList.remove('open');
+    document.body.classList.remove('sidebar-locked');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+  menuToggle.addEventListener('click', () =>
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar()
   );
+  sidebarBackdrop.addEventListener('click', closeSidebar);
+  document.querySelectorAll('.side-nav a').forEach(a =>
+    a.addEventListener('click', closeSidebar)
+  );
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+  });
+  // Collapsing back to desktop width while the mobile menu is open would
+  // otherwise leave the backdrop/scroll-lock stuck on.
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980 && sidebar.classList.contains('open')) closeSidebar();
+  });
 
   /* ---------------- Scroll progress bar ---------------- */
   const progressBar = document.getElementById('progressBar');

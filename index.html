@@ -104,7 +104,8 @@
     </div>
   </aside>
 
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
   <!-- ============ MAIN ============ -->
   <main class="content">
@@ -140,7 +141,7 @@
 
       <div class="stats-row" id="statsRow">
         <div class="stat"><span class="stat-num" data-target="4" data-suffix="+">0</span><span class="stat-label">Years Experience</span></div>
-        <div class="stat"><span class="stat-num" data-target="3" data-suffix="+">0</span><span class="stat-label">Enterprise AI Projects</span></div>
+        <div class="stat"><span class="stat-num" data-target="8" data-suffix="+">0</span><span class="stat-label">Projects Delivered</span></div>
         <div class="stat"><span class="stat-num" data-target="20" data-suffix="+">0</span><span class="stat-label">Core Technologies</span></div>
         <div class="stat"><span class="stat-num" data-target="4" data-suffix="">0</span><span class="stat-label">Certifications</span></div>
       </div>
@@ -290,6 +291,84 @@
             <span>OCR</span><span>Generative AI</span><span>Dynamics 365</span>
           </div>
         </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Student Finance Management System</h3>
+            <span class="project-date">Apr 2024 — Oct 2024</span>
+          </div>
+          <ul>
+            <li>Developed a unified system streamlining fee payments, scholarship processing, course transfers, and financial reporting.</li>
+            <li>Designed a course transfer workflow across multiple microservices, reducing manual intervention and data-correction effort.</li>
+            <li>Implemented batch processing for report generation, improving efficiency and cutting report generation time.</li>
+          </ul>
+          <div class="tags">
+            <span>.NET 8</span><span>Angular 18</span><span>C#</span><span>SQL Server</span><span>Microservices</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Payroll Management System</h3>
+            <span class="project-date">Oct 2023 — Apr 2024</span>
+          </div>
+          <ul>
+            <li>Developed a role-based system granting feature and workflow access according to defined roles and permissions.</li>
+            <li>Implemented Excel-based bulk import for salary revisions, cutting manual effort by 50% and speeding up data processing.</li>
+            <li>Integrated SQL Server Reporting Services (SSRS) to deliver dynamic payroll and operational reports in-app.</li>
+          </ul>
+          <div class="tags">
+            <span>.NET Framework</span><span>Angular 14</span><span>C#</span><span>SQL Server</span><span>SSRS</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Metaverse School</h3>
+            <span class="project-date">Oct 2022 — Oct 2023</span>
+          </div>
+          <ul>
+            <li>Built an interactive virtual school platform for live classes, presentations, and real-time collaborative learning.</li>
+            <li>Developed backend services for user management, session workflows, and core application functionality.</li>
+            <li>Integrated an AI-powered chatbot for topic-based Q&amp;A within the virtual learning environment.</li>
+            <li>Integrated Unity 3D with backend services for an immersive virtual classroom experience.</li>
+          </ul>
+          <div class="tags">
+            <span>.NET 8</span><span>C#</span><span>JavaScript</span><span>Unity 3D</span><span>SQL Server</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Virtual Automobile Showroom</h3>
+            <span class="project-date">Apr 2023 — Jul 2023</span>
+          </div>
+          <ul>
+            <li>Built a virtual showroom for exploring and interacting with vehicle models in an immersive 3D environment.</li>
+            <li>Implemented live human-agent interaction for real-time assistance and product queries.</li>
+            <li>Built a customization environment to modify and visually evaluate car components.</li>
+            <li>Implemented a virtual test-drive experience simulating customized vehicle configurations.</li>
+          </ul>
+          <div class="tags">
+            <span>.NET 8</span><span>C#</span><span>JavaScript</span><span>Unity 3D</span><span>SQL Server</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-head">
+            <h3>Virtual Amphitheatre</h3>
+            <span class="project-date">Dec 2022 — Mar 2023</span>
+          </div>
+          <ul>
+            <li>Built an interactive virtual conference and collaboration platform for guest and speaker participation.</li>
+            <li>Implemented role-based experiences for speakers and attendees across virtual meetings and presentations.</li>
+            <li>Developed backend functionality with .NET 8, C#, and SQL Server for application data management.</li>
+            <li>Integrated Unity 3D to create an immersive environment for interactive conferences and collaboration.</li>
+          </ul>
+          <div class="tags">
+            <span>.NET 8</span><span>C#</span><span>JavaScript</span><span>Unity 3D</span><span>SQL Server</span>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -418,6 +497,11 @@
   <p><strong>One Audit Platform</strong> (.NET Core, Azure, Angular) — 2025–Present</p>
   <p><strong>AI Agentic Marketplace</strong> (.NET Core, Azure, OpenAPI, RAG) — 2025–Present</p>
   <p><strong>AI Document Validator</strong> (OCR, Generative AI, Dynamics 365) — 2025–2026</p>
+  <p><strong>Student Finance Management System</strong> (.NET 8, Angular 18, C#, SQL Server, Microservices) — Apr 2024–Oct 2024</p>
+  <p><strong>Payroll Management System</strong> (.NET Framework, Angular 14, C#, SQL Server, SSRS) — Oct 2023–Apr 2024</p>
+  <p><strong>Metaverse School</strong> (.NET 8, C#, JavaScript, Unity 3D, SQL Server) — Oct 2022–Oct 2023</p>
+  <p><strong>Virtual Automobile Showroom</strong> (.NET 8, C#, JavaScript, Unity 3D, SQL Server) — Apr 2023–Jul 2023</p>
+  <p><strong>Virtual Amphitheatre</strong> (.NET 8, C#, JavaScript, Unity 3D, SQL Server) — Dec 2022–Mar 2023</p>
   <h2>Education</h2>
   <p>Jadavpur University — B.E. Electrical, Electronics &amp; Communications Engineering (Aug 2018 – Jun 2022)</p>
   <p>Burdwan Municipal High School — Higher Secondary (2016 – 2018)</p>

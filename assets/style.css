@@ -515,6 +515,14 @@ button { font-family: inherit; cursor: pointer; }
 .project-date { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); }
 .project-card p { color: var(--text-muted); font-size: 0.92rem; margin: 0 0 0.6rem; }
 .project-detail { font-size: 0.86rem !important; margin-bottom: 1rem !important; }
+.project-card ul { display: flex; flex-direction: column; gap: 0.5rem; margin: 0 0 1rem; }
+.project-card ul li {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  position: relative;
+  padding-left: 1.1rem;
+}
+.project-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
 
 /* ---------- Certifications ---------- */
 .cert-grid {
@@ -698,13 +706,28 @@ button { font-family: inherit; cursor: pointer; }
   .print-only h2 { font-size: 1.05rem; margin-top: 1.5rem; border-bottom: 1px solid #ccc; padding-bottom: 0.25rem; }
 }
 
+/* ---------- Sidebar backdrop (mobile) ---------- */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.45);
+  z-index: 480; /* below .sidebar (500), above content */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.sidebar-backdrop.open {
+  display: block;
+  opacity: 1;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
   .layout { grid-template-columns: 1fr; }
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    width: 280px;
+    width: min(280px, 84vw);
   }
   .sidebar.open { transform: translateX(0); box-shadow: var(--shadow); }
   .menu-toggle { display: flex; align-items: center; justify-content: center; }
@@ -713,9 +736,61 @@ button { font-family: inherit; cursor: pointer; }
   .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .cmdk-trigger span { font-size: 0.7rem; }
+  .cmdk-trigger { bottom: 1rem; right: 1rem; padding: 0.55rem 0.8rem; }
+  body.sidebar-locked { overflow: hidden; }
+}
+
+@media (max-width: 720px) {
+  .hero { min-height: auto; padding-top: 7rem; padding-bottom: 4rem; }
+  .hero-name { font-size: clamp(2.4rem, 11vw, 3.6rem); }
+  .stats-row { max-width: 100%; }
+  .quick-facts strong { display: block; width: auto; margin-bottom: 0.1rem; }
+  .about-grid { gap: 2rem; }
+  .terminal-body { min-height: 180px; font-size: 0.76rem; }
+  .contact-grid { gap: 2rem; }
+  .contact-cta { justify-content: flex-start; }
+  .btn-lg { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 560px) {
   .section { padding: 4.5rem 6vw 3.5rem; }
-  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { justify-content: center; }
+  .hero-contact { gap: 0.5rem; }
+  .chip { font-size: 0.76rem; padding: 0.4rem 0.7rem; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 1rem 0.75rem; }
+  .stat-num { font-size: 1.5rem; }
+  .cmdk-trigger { display: none; } /* command palette trigger is a desktop-keyboard affordance */
+  .scroll-cue { display: none; }
+  .section-title { font-size: 1.5rem; margin-bottom: 1.75rem; }
+  .skills-grid, .projects-grid, .cert-grid { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .footer-right { width: 100%; justify-content: space-between; }
+  .cmdk-box { width: 92vw; }
+}
+
+@media (max-width: 380px) {
+  .brand-mark { width: 38px; height: 38px; font-size: 1rem; }
+  .brand-text { font-size: 0.95rem; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .hero-name { font-size: 2.1rem; }
+}
+
+/* Short / landscape viewports: 100vh hero can clip content or force
+   awkward scrolling on rotated phones — fall back to natural height. */
+@media (max-height: 560px) and (max-width: 980px) {
+  .hero { min-height: auto; padding-top: 6rem; padding-bottom: 3rem; }
+  .scroll-cue { display: none; }
+}
+
+/* Respect reduced-motion preference across custom animations */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .status-pill .dot,
+  .cursor,
+  .scroll-cue span,
+  .toast { animation: none; }
+  .section, .sidebar, .sidebar-backdrop, .btn, .project-card, .skill-card, .cert-card {
+    transition-duration: 0.01ms !important;
+  }
 }
