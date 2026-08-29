@@ -157,12 +157,12 @@
     'Senior Associate – Technology @ PwC India',
     '',
     '> cat focus.txt',
-    '.NET Core · C# · SQL Server',
+    '.NET Core · C# · SQL Server', 'Python',
     'Microsoft Azure · Microsoft Graph API',
     'Agentic AI · MCP · RAG pipelines',
     '',
     '> echo $STATUS',
-    'Open to interesting problems ✔'
+    'Open to solving problems and delivering value ✔'
   ];
   const terminalBody = document.getElementById('terminalBody');
   let tLine = 0, tChar = 0;
