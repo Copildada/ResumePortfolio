@@ -120,18 +120,29 @@ body {
   display: flex;
   position: absolute;
   right: clamp(1rem, 5vw, 4rem);
-  bottom: 2rem;
+  bottom: 1.5rem;
   align-items: end;
   gap: 1.25rem;
   pointer-events: none;
   z-index: 1;
 }
-:root[data-theme="pokemon"] .pokemon-decoration img {
-  width: clamp(100px, 15vw, 190px);
+.pokemon-team {
+  display: flex;
+  align-items: end;
+  gap: clamp(0.15rem, 0.8vw, 0.75rem);
+}
+:root[data-theme="pokemon"] .pokemon-team img {
+  width: clamp(50px, 7.5vw, 108px);
   height: auto;
   filter: drop-shadow(0 10px 8px rgba(23, 45, 77, 0.22));
   animation: pika-bob 2.8s ease-in-out infinite;
 }
+.pokemon-team .pokemon-pikachu { width: clamp(76px, 10.5vw, 145px); animation-delay: 0s; }
+.pokemon-team .pokemon-psyduck { animation-delay: -0.45s; }
+.pokemon-team .pokemon-charmander { animation-delay: -0.9s; }
+.pokemon-team .pokemon-squirtle { animation-delay: -1.35s; }
+.pokemon-team .pokemon-bulbasaur { animation-delay: -1.8s; }
+.pokemon-team .pokemon-togepi { animation-delay: -2.25s; }
 .pokeball {
   position: relative;
   display: block;
@@ -855,6 +866,11 @@ button { font-family: inherit; cursor: pointer; }
   .contact-grid { gap: 2rem; }
   .contact-cta { justify-content: flex-start; }
   .btn-lg { width: 100%; justify-content: center; }
+  :root[data-theme="pokemon"] .pokemon-decoration { position: static; margin: 1.5rem 0 0; order: 10; }
+  :root[data-theme="pokemon"] .pokemon-team { width: 100%; justify-content: center; }
+  :root[data-theme="pokemon"] .pokemon-team img { width: clamp(38px, 12vw, 64px); }
+  :root[data-theme="pokemon"] .pokemon-team .pokemon-pikachu { width: clamp(54px, 15vw, 80px); }
+  :root[data-theme="pokemon"] .pokeball { display: none; }
 }
 
 @media (max-width: 560px) {
@@ -895,7 +911,7 @@ button { font-family: inherit; cursor: pointer; }
   .cursor,
   .scroll-cue span,
   .toast,
-  :root[data-theme="pokemon"] .pokemon-decoration img { animation: none; }
+  :root[data-theme="pokemon"] .pokemon-team img { animation: none; }
   .section, .sidebar, .sidebar-backdrop, .btn, .project-card, .skill-card, .cert-card {
     transition-duration: 0.01ms !important;
   }
