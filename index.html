@@ -34,7 +34,7 @@
   "telephone": "+91-8900710091",
   "address": { "@type": "PostalAddress", "addressLocality": "Kolkata", "addressRegion": "West Bengal", "addressCountry": "IN" },
   "sameAs": ["https://linkedin.com/in/akashbhatt1207"],
-  "knowsAbout": [".NET Core", "C#", "Microsoft Azure", "Agentic AI", "MCP", "SQL Server", "Microsoft Graph API"]
+  "knowsAbout": [".NET Core", "C#", "Java 25", "Microsoft Azure", "Agentic AI", "RAG", "MCP", "SQL Server", "Pinecone", "Microsoft Graph API"]
 }
 </script>
 </head>
@@ -98,9 +98,16 @@
         <a href="mailto:akash.12.7.00@gmail.com" aria-label="Email">@</a>
         <a href="tel:+918900710091" aria-label="Phone">☎</a>
       </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
-        <span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span>
-      </button>
+      <div class="theme-picker">
+        <label for="themeSelect">Theme</label>
+        <select id="themeSelect" aria-label="Choose site theme">
+          <option value="light">Porcelain</option>
+          <option value="dark">Midnight</option>
+          <option value="forest">Forest</option>
+          <option value="ocean">Ocean</option>
+          <option value="rose">Rose</option>
+        </select>
+      </div>
     </div>
   </aside>
 
@@ -143,7 +150,7 @@
         <div class="stat"><span class="stat-num" data-target="4" data-suffix="+">0</span><span class="stat-label">Years Experience</span></div>
         <div class="stat"><span class="stat-num" data-target="8" data-suffix="+">0</span><span class="stat-label">Projects Delivered</span></div>
         <div class="stat"><span class="stat-num" data-target="20" data-suffix="+">0</span><span class="stat-label">Core Technologies</span></div>
-        <div class="stat"><span class="stat-num" data-target="4" data-suffix="">0</span><span class="stat-label">Certifications</span></div>
+        <div class="stat"><span class="stat-num" data-target="7" data-suffix="">0</span><span class="stat-label">Certifications</span></div>
       </div>
 
       <a href="#about" class="scroll-cue" aria-label="Scroll down"><span></span></a>
@@ -189,20 +196,20 @@
         <div class="skill-card">
           <h3>Languages &amp; Frameworks</h3>
           <div class="tags">
-            <span>C#</span><span>.NET Core</span><span>ASP.NET</span><span>.NET Framework</span><span>Python</span><span>Node.js</span>
+            <span>C#</span><span>.NET Core</span><span>ASP.NET</span><span>.NET Framework</span><span>Python</span><span>Node.js</span><span>Java 25</span>
           </div>
         </div>
         <div class="skill-card">
           <h3>Cloud &amp; DevOps</h3>
           <div class="tags">
             <span>Microsoft Azure</span><span>App Services</span><span>Azure Functions</span><span>Blob Storage</span><span>Azure DevOps</span><span>CI/CD</span><span>Git</span>
-            <span>Docker</span><span>Kubernetes</span>
+            <span>Docker</span><span>Datadog</span>
           </div>
         </div>
         <div class="skill-card">
           <h3>Data &amp; Databases</h3>
           <div class="tags">
-            <span>SQL Server</span><span>MongoDB</span><span>PostgreSQL</span><span>Cosmos DB</span><span>QDrant</span>
+            <span>SQL Server</span><span>MongoDB</span><span>PostgreSQL</span><span>Pinecone</span><span>Cosmos DB</span>
           </div>
         </div>
         <div class="skill-card featured">
@@ -274,10 +281,10 @@
             <h3>Financial Statements Preparation App</h3>
             <span class="project-date">2026 — present</span>
           </div>
-          <p>A one-stop solution for preparing financial statements where users can prepare statements based on holdings, generate reports, and configure workflows end to end.</p>
-          <p class="project-detail">Implemented the application end to end and developed the reporting service using Graph API and SharePoint.</p>
+          <p>Workflow application for preparing and reviewing financial statements, with SharePoint document storage and Angular-based data-entry and review experiences.</p>
+          <p class="project-detail">Automates compilation from multiple source systems, reducing reconciliation effort for the finance team.</p>
           <div class="tags">
-            <span>.NET Core</span><span>Azure</span><span>Angular</span>
+            <span>.NET</span><span>Azure</span><span>SharePoint</span><span>Angular</span>
           </div>
         </article>
 
@@ -417,6 +424,21 @@
           <p>Anthropic</p>
         </div>
         <div class="cert-card">
+          <span class="cert-icon">🧠</span>
+          <h3>Claude Certified Architect – Professional</h3>
+          <p>Anthropic</p>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">💻</span>
+          <h3>Claude Certified Developer – Fundamentals</h3>
+          <p>Anthropic</p>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">✨</span>
+          <h3>Claude Certified Associate – Fundamentals</h3>
+          <p>Anthropic</p>
+        </div>
+        <div class="cert-card">
           <span class="cert-icon">☁️</span>
           <h3>Microsoft Certified: Azure Fundamentals (AZ-900)</h3>
           <p>Microsoft</p>
@@ -489,10 +511,10 @@
   <h2>Summary</h2>
   <p>Results-driven .NET Software Senior Consultant at PwC India with 4+ years of experience building scalable backend systems and enterprise AI solutions. Hands-on expertise in .NET Core, C#, SQL Server, and Microsoft Azure. Proven track record delivering AI-powered applications including an Agentic AI Marketplace, Generative AI document validation, and Microsoft Graph API integrations. Experienced in Agile delivery.</p>
   <h2>Technical Skills</h2>
-  <p><strong>Languages &amp; Frameworks:</strong> C#, .NET Core, ASP.NET, .NET Framework, Python, Node.js</p>
-  <p><strong>Cloud &amp; DevOps:</strong> Microsoft Azure, App Services, Azure Functions, Blob Storage, Azure DevOps, CI/CD, Git</p>
-  <p><strong>Data &amp; Databases:</strong> SQL Server, MongoDB, PostgreSQL</p>
-  <p><strong>AI &amp; Generative AI:</strong> Agentic AI, MCP, LLM Integration, Prompt Engineering, RAG, Context Engineering</p>
+  <p><strong>Languages &amp; Frameworks:</strong> C#, .NET Core, ASP.NET, .NET Framework, Python, Node.js, Java 25</p>
+  <p><strong>Cloud &amp; DevOps:</strong> Microsoft Azure, Docker, App Services, Azure Functions, Blob Storage, Azure DevOps, CI/CD, Git, Datadog</p>
+  <p><strong>Data &amp; Databases:</strong> SQL Server, MongoDB, PostgreSQL, Pinecone, Cosmos DB</p>
+  <p><strong>AI &amp; Generative AI:</strong> Agentic AI, RAG, MCP, LLM Integration, Prompt Engineering</p>
   <p><strong>Integrations &amp; Platforms:</strong> Microsoft Graph API, SharePoint, Microsoft Dynamics 365</p>
   <p><strong>AI-Assisted Development:</strong> GitHub Copilot, Cursor, Claude</p>
   <p><strong>Methodologies:</strong> Agile</p>
@@ -508,6 +530,7 @@
   </ul>
   <h2>Projects</h2>
   <p><strong>One Audit Platform</strong> (.NET Core, Azure, Angular) — 2025–Present</p>
+  <p><strong>Financial Statements Preparation App</strong> (.NET, Azure, SharePoint, Angular) — 2026–Present</p>
   <p><strong>AI Agentic Marketplace</strong> (.NET Core, Azure, OpenAPI, RAG) — 2025–Present</p>
   <p><strong>AI Document Validator</strong> (OCR, Generative AI, Dynamics 365) — 2025–2026</p>
   <p><strong>Student Finance Management System</strong> (.NET 8, Angular 18, C#, SQL Server, Microservices) — Apr 2024–Oct 2024</p>
@@ -519,7 +542,7 @@
   <p>Jadavpur University — B.E. Electrical, Electronics &amp; Communications Engineering (Aug 2018 – Jun 2022)</p>
   <p>Burdwan Municipal High School — Higher Secondary (2016 – 2018)</p>
   <h2>Certifications</h2>
-  <p>Claude Certified Architect - Fundamentals (Anthropic); Microsoft Certified: Azure Fundamentals (AZ-900); Data Analytics: Dashboard vs Data Stories; Ask Questions to Make Data-Driven Decisions</p>
+  <p>Claude Certified Architect - Professional; Claude Certified Developer - Fundamentals; Claude Certified Associate - Fundamentals; Claude Certified Architect - Fundamentals (Anthropic); Microsoft Certified: Azure Fundamentals (AZ-900); Data Analytics: Dashboard vs Data Stories; Ask Questions to Make Data-Driven Decisions</p>
 </div>
 
 <script src="/assets/app.js"></script>

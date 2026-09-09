@@ -34,8 +34,47 @@
   color-scheme: dark;
 }
 
+:root[data-theme="forest"] {
+  --bg: #10231d;
+  --bg-alt: #18352b;
+  --text: #eff6eb;
+  --text-muted: #b4c8b7;
+  --border: #315545;
+  --accent: #a9d76c;
+  --accent-soft: #243f26;
+  --card-bg: #163027;
+  --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.65);
+  color-scheme: dark;
+}
+
+:root[data-theme="ocean"] {
+  --bg: #061c2d;
+  --bg-alt: #0b2b42;
+  --text: #eaf7ff;
+  --text-muted: #a9c7d7;
+  --border: #22506a;
+  --accent: #65d4e8;
+  --accent-soft: #123d55;
+  --card-bg: #0b2639;
+  --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.68);
+  color-scheme: dark;
+}
+
+:root[data-theme="rose"] {
+  --bg: #fff6f6;
+  --bg-alt: #fce9ea;
+  --text: #321d28;
+  --text-muted: #785967;
+  --border: #ebcdd2;
+  --accent: #be3e67;
+  --accent-soft: #f9dce4;
+  --card-bg: #ffffff;
+  --shadow: 0 12px 30px -18px rgba(80, 24, 42, 0.25);
+  color-scheme: light;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme]) {
     --bg: #0d0d0f;
     --bg-alt: #17171a;
     --text: #f2f1ec;
@@ -201,19 +240,29 @@ button { font-family: inherit; cursor: pointer; }
 }
 .social-row a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-.theme-toggle {
+.theme-picker {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.theme-picker label {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.theme-picker select {
+  width: 100%;
   border: 1px solid var(--border);
-  background: transparent;
+  background: var(--card-bg);
   color: var(--text);
-  padding: 0.5rem 0.75rem;
+  padding: 0.55rem 0.75rem;
   border-radius: 8px;
   font-size: 0.8rem;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
-.theme-toggle:hover { border-color: var(--accent); }
+.theme-picker select:hover, .theme-picker select:focus { border-color: var(--accent); outline: none; }
 
 .menu-toggle {
   display: none;

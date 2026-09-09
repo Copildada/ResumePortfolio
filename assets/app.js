@@ -9,26 +9,31 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ---------------- Theme toggle ---------------- */
+  /* ---------------- Theme selection ---------------- */
   const root = document.documentElement;
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const themeLabel = document.getElementById('themeLabel');
+  const themeSelect = document.getElementById('themeSelect');
+  const themes = ['light', 'dark', 'forest', 'ocean', 'rose'];
 
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
-    themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    themeLabel.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    themeSelect.value = theme;
   }
   const savedTheme = localStorage.getItem('theme') ||
     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   applyTheme(savedTheme);
 
-  themeToggle.addEventListener('click', function () {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  themeSelect.addEventListener('change', function () {
+    applyTheme(themeSelect.value);
+    localStorage.setItem('theme', themeSelect.value);
+  });
+
+  function cycleTheme() {
+    const current = root.getAttribute('data-theme');
+    const next = themes[(themes.indexOf(current) + 1) % themes.length];
     applyTheme(next);
     localStorage.setItem('theme', next);
-  });
+    showToast(`Theme changed to ${themeSelect.options[themeSelect.selectedIndex].text}`);
+  }
 
   /* ---------------- Mobile menu ---------------- */
   const sidebar = document.getElementById('sidebar');
@@ -245,7 +250,7 @@
     { label: 'Education', hint: 'go', action: () => scrollToId('education') },
     { label: 'Certifications', hint: 'go', action: () => scrollToId('certifications') },
     { label: 'Contact', hint: 'go', action: () => scrollToId('contact') },
-    { label: 'Toggle dark / light theme', hint: 'action', action: () => themeToggle.click() },
+    { label: 'Switch to the next theme', hint: 'action', action: cycleTheme },
     { label: 'Copy email address', hint: 'action', action: () => document.querySelector('.copy-chip[data-copy^="akash"]').click() },
     { label: 'Download résumé (PDF)', hint: 'action', action: () => document.getElementById('downloadResumeBtn').click() },
     { label: 'Open LinkedIn', hint: 'link', action: () => window.open('https://linkedin.com/in/akashbhatt1207', '_blank') },
