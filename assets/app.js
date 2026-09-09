@@ -229,11 +229,9 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ---------------- Download résumé (print view) ---------------- */
-  document.getElementById('downloadResumeBtn').addEventListener('click', () => {
-    showToast('Opening print dialog — choose "Save as PDF"');
-    setTimeout(() => window.print(), 300);
-  });
+  /* ---------------- Download résumé ----------------
+     The download link is intentionally handled natively by the browser,
+     so visitors receive the supplied PDF rather than a print-dialog view. */
 
   /* ---------------- Command palette (Ctrl/Cmd+K or "/") ---------------- */
   const cmdkOverlay = document.getElementById('cmdkOverlay');
