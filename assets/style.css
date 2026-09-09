@@ -115,34 +115,32 @@ body {
 }
 
 /* ---------- Pokémon theme details ---------- */
-.pokemon-decoration { display: none; }
-:root[data-theme="pokemon"] .pokemon-decoration {
+.pokemon-section-decoration { display: none; }
+:root[data-theme="pokemon"] .pokemon-section-decoration {
   display: flex;
   position: absolute;
   right: clamp(1rem, 5vw, 4rem);
-  bottom: 1.5rem;
-  align-items: end;
-  gap: 1.25rem;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
-.pokemon-team {
-  display: flex;
-  align-items: end;
-  gap: clamp(0.15rem, 0.8vw, 0.75rem);
-}
-:root[data-theme="pokemon"] .pokemon-team img {
-  width: clamp(50px, 7.5vw, 108px);
+:root[data-theme="pokemon"] img.pokemon-section-decoration,
+:root[data-theme="pokemon"] .pokemon-home img {
+  width: clamp(76px, 10.5vw, 145px);
   height: auto;
   filter: drop-shadow(0 10px 8px rgba(23, 45, 77, 0.22));
   animation: pika-bob 2.8s ease-in-out infinite;
 }
-.pokemon-team .pokemon-pikachu { width: clamp(76px, 10.5vw, 145px); animation-delay: 0s; }
-.pokemon-team .pokemon-psyduck { animation-delay: -0.45s; }
-.pokemon-team .pokemon-charmander { animation-delay: -0.9s; }
-.pokemon-team .pokemon-squirtle { animation-delay: -1.35s; }
-.pokemon-team .pokemon-bulbasaur { animation-delay: -1.8s; }
-.pokemon-team .pokemon-togepi { animation-delay: -2.25s; }
+.pokemon-home { bottom: 1.5rem; align-items: end; gap: 1.25rem; }
+.pokemon-about, .pokemon-projects, .pokemon-certifications { bottom: 1.5rem; }
+.pokemon-skills, .pokemon-education { top: 1.75rem; }
+.pokemon-experience, .pokemon-contact { top: 1.25rem; }
+.pokemon-about { animation-delay: -0.4s !important; }
+.pokemon-skills { animation-delay: -0.8s !important; }
+.pokemon-experience { animation-delay: -1.2s !important; }
+.pokemon-projects { animation-delay: -1.6s !important; }
+.pokemon-education { animation-delay: -2s !important; }
+.pokemon-certifications { animation-delay: -2.4s !important; }
+.pokemon-contact { animation-delay: -2.8s !important; }
 .pokeball {
   position: relative;
   display: block;
@@ -354,6 +352,7 @@ button { font-family: inherit; cursor: pointer; }
   padding: 6rem 5vw 5rem;
   max-width: 1100px;
   border-bottom: 1px solid var(--border);
+  position: relative;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -866,10 +865,9 @@ button { font-family: inherit; cursor: pointer; }
   .contact-grid { gap: 2rem; }
   .contact-cta { justify-content: flex-start; }
   .btn-lg { width: 100%; justify-content: center; }
-  :root[data-theme="pokemon"] .pokemon-decoration { position: static; margin: 1.5rem 0 0; order: 10; }
-  :root[data-theme="pokemon"] .pokemon-team { width: 100%; justify-content: center; }
-  :root[data-theme="pokemon"] .pokemon-team img { width: clamp(38px, 12vw, 64px); }
-  :root[data-theme="pokemon"] .pokemon-team .pokemon-pikachu { width: clamp(54px, 15vw, 80px); }
+  :root[data-theme="pokemon"] img.pokemon-section-decoration,
+  :root[data-theme="pokemon"] .pokemon-home img { width: clamp(54px, 16vw, 86px); opacity: 0.5; }
+  :root[data-theme="pokemon"] .pokemon-home { position: static; margin: 1.5rem 0 0; order: 10; }
   :root[data-theme="pokemon"] .pokeball { display: none; }
 }
 
@@ -911,7 +909,7 @@ button { font-family: inherit; cursor: pointer; }
   .cursor,
   .scroll-cue span,
   .toast,
-  :root[data-theme="pokemon"] .pokemon-team img { animation: none; }
+  :root[data-theme="pokemon"] .pokemon-section-decoration { animation: none; }
   .section, .sidebar, .sidebar-backdrop, .btn, .project-card, .skill-card, .cert-card {
     transition-duration: 0.01ms !important;
   }
