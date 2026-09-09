@@ -12,7 +12,7 @@
   /* ---------------- Theme selection ---------------- */
   const root = document.documentElement;
   const themeSelect = document.getElementById('themeSelect');
-  const themes = ['light', 'dark', 'forest', 'ocean', 'rose'];
+  const themes = ['light', 'dark', 'forest', 'ocean', 'rose', 'pokemon'];
 
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
